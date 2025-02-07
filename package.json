@@ -2,8 +2,8 @@
   "name": "it35-lab",
   "private": true,
   "version": "0.0.1",
-  "homepage": "https://nyannncatt.github.io/it35-lab/",
   "type": "module",
+  "homepage": "https://nyannncatt.github.io/it35-lab/",
   "scripts": {
 
     "predeploy": "npm run build",
