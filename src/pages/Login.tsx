@@ -12,15 +12,12 @@ import {
   IonToolbar,
   useIonRouter
 } from '@ionic/react';
-
 import { easelOutline, keyOutline, personCircleOutline, tvOutline } from 'ionicons/icons';
-
 function Login() {
   const navigation = useIonRouter();
   const doLogin = () => {
     navigation.push('/it35-lab/app', 'forward', 'replace');
   };
-
   return (
     <IonPage>
       <IonHeader>
@@ -53,5 +50,4 @@ function Login() {
     </IonPage>
   );
 }
-
 export default Login;
