@@ -29,7 +29,7 @@ function Login() {
         </IonToolbar>
       </IonHeader>
       <IonContent className='ion-padding'>
-        <div style={{ textAlign: 'center', marginBottom: '10px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
           <IonIcon icon={tvOutline} style={{ fontSize: '70px' }} />
         </div>
         <IonItem>
