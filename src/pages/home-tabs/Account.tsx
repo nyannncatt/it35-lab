@@ -16,7 +16,7 @@ import {
             <IonButtons slot='start'>
               <IonMenuButton></IonMenuButton>
             </IonButtons>
-            <IonTitle>Account</IonTitle>
+            <IonTitle>My-Account</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
@@ -28,7 +28,7 @@ import {
             height: '100%',
           }}
         >
-          Search
+          My-Account
         </div>
         </IonContent>
       </IonPage>
