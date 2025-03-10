@@ -46,17 +46,19 @@ function Registration() {
 
         <IonItem lines="full">
           <IonIcon icon={personCircleOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
-          <IonInput label="" placeholder="Enter Username" clearInput></IonInput>
+          <IonInput label="" placeholder="Create Email Address" clearInput></IonInput>
         </IonItem>
+
 
         <IonItem lines="full">
           <IonIcon icon={keyOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
-          <IonInput label="" type="password" placeholder="Enter Password" clearOnEdit></IonInput>
+          <IonInput label="" type="password" placeholder="Create Username" clearOnEdit></IonInput>
         </IonItem>
-
+        
+      
         <IonItem lines="full">
           <IonIcon icon={keyOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
-          <IonInput label="" type="password" placeholder="Enter Email Address" clearOnEdit></IonInput>
+          <IonInput label="" type="password" placeholder="Create Password" clearOnEdit></IonInput>
         </IonItem>
 
         <IonButton onClick={doRegister} expand="block" shape="round" color="primary" style={{ marginTop: '20px' }}>
