@@ -62,10 +62,6 @@ function Registration() {
         <IonButton onClick={doRegister} expand="block" shape="round" color="primary" style={{ marginTop: '20px' }}>
           Register
         </IonButton>
-
-        <div style={{ textAlign: 'center', marginTop: '15px' }}>
-          <p style={{ color: '#666' }}>No account? Igotchu bro <a href="/it35-lab/Regsus" style={{ color: '#3880ff' }}>Register here</a></p>
-        </div>
       </IonContent>
     </IonPage>
   );

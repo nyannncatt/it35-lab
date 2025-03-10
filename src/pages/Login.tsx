@@ -66,7 +66,7 @@ function Login() {
         </IonButton>
 
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
-          <p style={{ color: '#666' }}>No account? Igotchu bro <a href="/it35-lab/registration" style={{ color: '#3880ff' }}>Register here</a></p>
+          <p style={{ color: '#666' }}>No account?🙏 Igotchu bro🤝 <a href="/it35-lab/registration" style={{ color: '#3880ff' }}>Register here</a></p>
         </div>
       </IonContent>
     </IonPage>
