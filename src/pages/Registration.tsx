@@ -13,7 +13,7 @@ import {
   IonToolbar,
   useIonRouter
 } from '@ionic/react';
-import { keyOutline, personCircleOutline, tvOutline } from 'ionicons/icons';
+import { keyOutline, personCircleOutline ,mailOutline, personAddSharp } from 'ionicons/icons';
 
 function Registration() {
     const navigation = useIonRouter();
@@ -40,26 +40,32 @@ function Registration() {
           justifyContent: 'center',
           height: '40vh'
         }}>
-          <IonIcon icon={tvOutline} style={{ fontSize: '80px', color: '#3880ff' }} />
+          <IonIcon icon={personAddSharp} style={{ fontSize: '80px', color: '#3880ff' }} />
           <h2 style={{ marginTop: '10px', color: '#3880ff' }}>Register now!</h2>
         </div>
 
         <IonItem lines="full">
-          <IonIcon icon={personCircleOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
+          <IonIcon icon={mailOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
           <IonInput label="" placeholder="Create Email Address" clearInput></IonInput>
         </IonItem>
 
 
         <IonItem lines="full">
-          <IonIcon icon={keyOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
-          <IonInput label="" type="password" placeholder="Create Username" clearOnEdit></IonInput>
+          <IonIcon icon={personCircleOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
+          <IonInput label=""  placeholder="Create Username" clearInput></IonInput>
         </IonItem>
         
       
         <IonItem lines="full">
           <IonIcon icon={keyOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
-          <IonInput label="" type="password" placeholder="Create Password" clearOnEdit></IonInput>
+          <IonInput label="" type="password" placeholder="Create Password" clearInput></IonInput>
         </IonItem>
+
+        <IonItem lines="full">
+          <IonIcon icon={keyOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
+          <IonInput label="" type="password" placeholder="Confirm Password" clearInput></IonInput>
+        </IonItem>
+
 
         <IonButton onClick={doRegister} expand="block" shape="round" color="primary" style={{ marginTop: '20px' }}>
           Register

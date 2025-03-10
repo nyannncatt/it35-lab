@@ -13,7 +13,7 @@ import {
   IonToolbar,
   useIonRouter
 } from '@ionic/react';
-import { keyOutline, personCircleOutline, tvOutline } from 'ionicons/icons';
+import { keyOutline, personCircleOutline, tvOutline, } from 'ionicons/icons';
 import Registration from './Registration';
 
 function Login() {
