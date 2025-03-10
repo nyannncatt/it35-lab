@@ -14,6 +14,7 @@ import {
   useIonRouter
 } from '@ionic/react';
 import { keyOutline, personCircleOutline, tvOutline } from 'ionicons/icons';
+import Registration from './Registration';
 
 function Login() {
   const navigation = useIonRouter();
@@ -25,7 +26,7 @@ function Login() {
 
   // Registration Function
   const doRegister = () => {
-    navigation.push('/it35-lab', 'forward', 'replace');
+    navigation.push('/it35-lab/Registration', 'forward', 'replace');
   };
 
 
@@ -66,7 +67,16 @@ function Login() {
         </IonButton>
 
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
-          <p style={{ color: '#666' }}>No account?🙏 Igotchu bro🤝 <a href="/it35-lab/registration" style={{ color: '#3880ff' }}>Register here</a></p>
+        <p style={{ color: '#666' }}>
+  No account? 🙏 Igotchu bro 🤝 
+  <span 
+    style={{ color: '#3880ff', cursor: 'pointer', textDecoration: 'underline' }} 
+    onClick={doRegister}
+  >
+    Register here
+  </span>
+</p>
+
         </div>
       </IonContent>
     </IonPage>

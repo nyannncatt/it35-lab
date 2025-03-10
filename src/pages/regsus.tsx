@@ -3,7 +3,11 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonText,
+  IonInput,
+  IonItem,
+  IonLabel,
   IonMenuButton,
   IonPage,
   IonTitle,
@@ -11,7 +15,7 @@ import {
   useIonRouter
 } from '@ionic/react';
 
-function Regsus() {
+function regsus() {
   const navigation = useIonRouter();
 
   // Login Function
@@ -22,7 +26,7 @@ function Regsus() {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonButtons slot='start'>
             <IonMenuButton />
           </IonButtons>
@@ -33,7 +37,7 @@ function Regsus() {
         {/* Centered GIF and Text */}
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
           <img 
-            src="https://media1.tenor.com/m/VSskfEaZHvkAAAAC/cheers-happy.gif" 
+            src="https://media.tenor.com/XyNq9PqC8FIAAAAi/niko-oneshot-niko-vibe.gif" 
             alt="Success Animation" 
             style={{ maxWidth: '100%', height: 'auto' }} 
           />
@@ -64,4 +68,4 @@ function Regsus() {
   );
 }
 
-export default Regsus;
+export default regsus;
