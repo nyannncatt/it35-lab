@@ -4,10 +4,6 @@ import {
   IonContent,
   IonHeader,
   IonText,
-  IonIcon,
-  IonInput,
-  IonItem,
-  IonLabel,
   IonMenuButton,
   IonPage,
   IonTitle,
@@ -24,26 +20,48 @@ function Regsus() {
   };
 
   return (
-      <IonPage>
-          <IonHeader>
-              <IonToolbar>
-                  <IonButtons slot='start'>
-                      <IonMenuButton></IonMenuButton>
-                  </IonButtons>
-                  <IonTitle>Success</IonTitle>
-              </IonToolbar>
-          </IonHeader>
-          <IonContent fullscreen className='ion-padding'>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot='start'>
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>Success</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen className='ion-padding'>
+        {/* Centered GIF and Text */}
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+          <img 
+            src="https://media1.tenor.com/m/VSskfEaZHvkAAAAC/cheers-happy.gif" 
+            alt="Success Animation" 
+            style={{ maxWidth: '100%', height: 'auto' }} 
+          />
           <IonText color="success">
-                    <h2>You have been successfully registered!</h2>
-                </IonText>
-          <IonButton onClick={doLogin} expand="block" shape="round" color="primary" style={{ marginTop: '20px' }}>
+            <h2 style={{
+              textAlign: 'center',
+              color: 'green',
+              padding: '10px',
+              borderRadius: '10px',
+  
+            }}>
+              You have been successfully registered!
+            </h2>
+          </IonText>
+        </div>
+
+        <IonButton 
+          onClick={doLogin} 
+          expand="block" 
+          shape="round" 
+          color="primary" 
+          style={{ marginTop: '120px' }}>
           Login
         </IonButton>
 
-          </IonContent>
-      </IonPage>
+      </IonContent>
+    </IonPage>
   );
-};
+}
 
 export default Regsus;
