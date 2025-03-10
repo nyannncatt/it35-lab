@@ -15,19 +15,12 @@ import {
 } from '@ionic/react';
 import { keyOutline, personCircleOutline, tvOutline } from 'ionicons/icons';
 
-function Login() {
-  const navigation = useIonRouter();
-
-  // Login Function
-  const doLogin = () => {
-    navigation.push('/it35-lab/app', 'forward', 'replace');
-  };
-
-  // Registration Function
-  const doRegister = () => {
-    navigation.push('/it35-lab', 'forward', 'replace');
-  };
-
+function Registration() {
+    const navigation = useIonRouter();
+  
+    const doRegister = () => {
+      navigation.push('/it35-lab/app', 'forward', 'replace');
+};
 
   return (
     <IonPage>
@@ -36,7 +29,7 @@ function Login() {
           <IonButtons slot='start'>
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Login</IonTitle>
+          <IonTitle>Registration</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className='ion-padding' fullscreen>
@@ -48,7 +41,7 @@ function Login() {
           height: '40vh'
         }}>
           <IonIcon icon={tvOutline} style={{ fontSize: '80px', color: '#3880ff' }} />
-          <h2 style={{ marginTop: '10px', color: '#3880ff' }}>Welcome Back!</h2>
+          <h2 style={{ marginTop: '10px', color: '#3880ff' }}>Register now!</h2>
         </div>
 
         <IonItem lines="full">
@@ -61,16 +54,21 @@ function Login() {
           <IonInput label="" type="password" placeholder="Enter Password" clearOnEdit></IonInput>
         </IonItem>
 
-        <IonButton onClick={doLogin} expand="block" shape="round" color="primary" style={{ marginTop: '20px' }}>
-          Login
+        <IonItem lines="full">
+          <IonIcon icon={keyOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
+          <IonInput label="" type="password" placeholder="Enter Email Address" clearOnEdit></IonInput>
+        </IonItem>
+
+        <IonButton onClick={doRegister} expand="block" shape="round" color="primary" style={{ marginTop: '20px' }}>
+          Register
         </IonButton>
 
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
-          <p style={{ color: '#666' }}>No account? Igotchu bro <a href="/it35-lab/registration" style={{ color: '#3880ff' }}>Register here</a></p>
+          <p style={{ color: '#666' }}>No account? Igotchu bro <a href="#" style={{ color: '#3880ff' }}>Register here</a></p>
         </div>
       </IonContent>
     </IonPage>
   );
 }
 
-export default Login;
+export default Registration;
