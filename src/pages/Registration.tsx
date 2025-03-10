@@ -19,7 +19,7 @@ function Registration() {
     const navigation = useIonRouter();
   
     const doRegister = () => {
-      navigation.push('/it35-lab/app', 'forward', 'replace');
+      navigation.push('/it35-lab/Regsus', 'forward', 'replace');
 };
 
   return (
@@ -64,7 +64,7 @@ function Registration() {
         </IonButton>
 
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
-          <p style={{ color: '#666' }}>No account? Igotchu bro <a href="#" style={{ color: '#3880ff' }}>Register here</a></p>
+          <p style={{ color: '#666' }}>No account? Igotchu bro <a href="/it35-lab/Regsus" style={{ color: '#3880ff' }}>Register here</a></p>
         </div>
       </IonContent>
     </IonPage>
