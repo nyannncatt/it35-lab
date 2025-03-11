@@ -23,19 +23,26 @@ function Registration() {
   const [alertMessage, setAlertMessage] = useState('');
 
   const doRegister = () => {
-    const email = document.getElementById("email") as HTMLInputElement;
-    const username = document.getElementById("username") as HTMLInputElement;
-    const password = document.getElementById("password") as HTMLInputElement;
-    const confirmPassword = document.getElementById("confirmPassword") as HTMLInputElement;
+    const email = (document.getElementById("email") as HTMLInputElement)?.value.trim();
+    const username = (document.getElementById("username") as HTMLInputElement)?.value.trim();
+    const password = (document.getElementById("password") as HTMLInputElement)?.value.trim();
+    const confirmPassword = (document.getElementById("confirmPassword") as HTMLInputElement)?.value.trim();
 
-    // Check if passwords match
-    if (password.value !== confirmPassword.value) {
-      setAlertMessage("Passwords do not match. Please try again.");
-      setShowAlert(true); // Show alert if passwords don't match
+  
+    if (!email || !username || !password || !confirmPassword) {
+      setAlertMessage("Please fill in all fields before proceeding.");
+      setShowAlert(true);
       return;
     }
 
-    // If passwords match, proceed with registration
+  
+    if (password !== confirmPassword) {
+      setAlertMessage("Passwords do not match. Please try again.");
+      setShowAlert(true);
+      return;
+    }
+
+  
     navigation.push('/it35-lab/Regsus', 'forward', 'replace');
   };
 
@@ -49,6 +56,7 @@ function Registration() {
           <IonTitle>Registration</IonTitle>
         </IonToolbar>
       </IonHeader>
+
       <IonContent className='ion-padding' fullscreen>
         <div style={{
           display: 'flex',
@@ -81,15 +89,21 @@ function Registration() {
           <IonInput id="confirmPassword" label="" type="password" placeholder="Confirm Password" clearInput />
         </IonItem>
 
-        <IonButton onClick={doRegister} expand="block" shape="round" color="primary" style={{ marginTop: '20px' }}>
+        <IonButton 
+          onClick={doRegister} 
+          expand="block" 
+          shape="round" 
+          color="primary" 
+          style={{ marginTop: '20px' }}
+        >
           Register
         </IonButton>
 
-        {/* Alert for password mismatch */}
+      
         <IonAlert
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
-          header={'Password Error'}
+          header={'Registration Error'}
           message={alertMessage}
           buttons={['OK']}
         />
