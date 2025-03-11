@@ -157,12 +157,14 @@ const Login: React.FC = () => {
 
         {/* Toast Message */}
         <IonToast
+        
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
           message="Login successful! Redirecting..."
           duration={1500}
           position="bottom"
           color="primary"
+          
         />
       </IonContent>
     </IonPage>

@@ -184,7 +184,18 @@ function Registration() {
                 color: 'white',
               }}
             >
-              <IonIcon icon={personAddSharp} style={{ fontSize: '50px', color: 'white', marginBottom: '10px' }} />
+         <img 
+      
+        src="https://media.tenor.com/XyNq9PqC8FIAAAAi/niko-oneshot-niko-vibe.gif" 
+        alt="Success Animation" 
+        style={{
+          width: '100px', 
+          height: '100px',
+          marginBottom: '10px',
+          borderRadius: '50%',
+          border: '4px solid #fff'
+        }}
+        />
               <IonText style={{ textAlign: 'center', marginBottom: '10px' }}>
                 <h3>Registration Successful!</h3>
                 <p>Redirecting...</p>
