@@ -4,7 +4,6 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
-  
   IonInput,
   IonItem,
   IonLabel,
@@ -15,35 +14,35 @@ import {
   IonToolbar,
   useIonRouter,
   IonText,
-  IonInputPasswordToggle
+  IonInputPasswordToggle,
+  IonAlert,
+  IonToast
 } from '@ionic/react';
 import { keyOutline, personCircleOutline, tvOutline } from 'ionicons/icons';
 import { useState } from 'react';
 import Registration from './Registration';
 
 function Login() {
-  const [isOpen, setIsOpen] = useState(false);
-  const navigation = useIonRouter();
-  const [showToast, setShowToast] = useState(false); // Corrected this
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showToast, setShowToast] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigation = useIonRouter();
 
   const doLogin = () => {
-    const username = document.getElementById('username') as HTMLInputElement;
-    const password = document.getElementById('password') as HTMLInputElement;
-
-    if (username.value === 'admin' && password.value === 'admin') {
+    if (username === 'admin' && password === 'admin') {
+      setShowToast(true);
       setTimeout(() => {
-        
-        navigation.push('/it35-lab/app', 'forward', 'replace'); 
-      }, 1500); 
-
+        navigation.push('/it35-lab/app', 'forward', 'replace');
+      }, 1500);
     } else {
       setErrorMessage('Invalid username or password. Please try again.');
-      setShowModal(true); 
+      setShowModal(true);
     }
   };
- 
+
   const doRegister = () => {
     navigation.push('/it35-lab/Registration', 'forward', 'replace');
   };
@@ -72,23 +71,34 @@ function Login() {
 
         <IonItem lines="full">
           <IonIcon icon={personCircleOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
-          <IonInput id="username" placeholder="Enter Username" clearInput />
+          <IonInput
+            id="username"
+            placeholder="Enter Username"
+            clearInput
+            value={username}
+            onIonChange={(e) => setUsername(e.detail.value!)}
+          />
         </IonItem>
 
         <IonItem lines="full">
-  <IonIcon icon={keyOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
-  <IonInput
-    id="password"
-    type="password"
-    placeholder="Enter Password"
-    value=""
-  >
-    <IonInputPasswordToggle slot="end" />
-  </IonInput>
-</IonItem>
+          <IonIcon icon={keyOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
+          <IonInput
+            id="password"
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onIonChange={(e) => setPassword(e.detail.value!)}
+          />
+          <IonInputPasswordToggle slot="end" />
+        </IonItem>
 
-
-        <IonButton onClick={doLogin} expand="block" shape="round" color="primary" style={{ marginTop: '20px' }}>
+        <IonButton
+          onClick={doLogin}
+          expand="block"
+          shape="round"
+          color="primary"
+          style={{ marginTop: '20px' }}
+        >
           Login
         </IonButton>
 
@@ -115,7 +125,7 @@ function Login() {
               padding: '10px'
             }}>
               <IonIcon icon={keyOutline} style={{ fontSize: '90px', color: 'blue' }} />
-              <IonText style={{ color: 'white' }}>  {}
+              <IonText style={{ color: 'white' }}>
                 <h3>{errorMessage}</h3>
               </IonText>
               <IonButton
@@ -127,12 +137,28 @@ function Login() {
               >
                 Close
               </IonButton>
-               {/* Toast Message */}
-        
-              
             </div>
           </IonContent>
         </IonModal>
+
+        {/* Alert Message */}
+        <IonAlert
+          isOpen={showAlert}
+          onDidDismiss={() => setShowAlert(false)}
+          header="Login Failed"
+          message={errorMessage}
+          buttons={['OK']}
+        />
+
+        {/* Toast Message */}
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Login successful! Redirecting..."
+          duration={1500}
+          position="bottom"
+          color="primary"
+        />
       </IonContent>
     </IonPage>
   );
