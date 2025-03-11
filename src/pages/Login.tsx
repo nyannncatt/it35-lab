@@ -15,31 +15,35 @@ import {
   useIonRouter,
   IonText,
   IonInputPasswordToggle,
-  IonAlert,
   IonToast
 } from '@ionic/react';
 import { keyOutline, personCircleOutline, tvOutline } from 'ionicons/icons';
 import { useState } from 'react';
 import Registration from './Registration';
 
-function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [showToast, setShowToast] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+const Login: React.FC = () => {
   const navigation = useIonRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);  
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showToast, setShowToast] = useState(false);
+
+  const user_email = 'admin';
+  const user_pwd = 'admin';
 
   const doLogin = () => {
-    if (username === 'admin' && password === 'admin') {
+    if (email !== user_email || password !== user_pwd) {
+      setErrorMessage('Invalid username or password. Please try again.');
+      setShowModal(true); 
+      return;
+    } else {
+      console.log(email);
+      console.log(password);
       setShowToast(true);
       setTimeout(() => {
         navigation.push('/it35-lab/app', 'forward', 'replace');
       }, 1500);
-    } else {
-      setErrorMessage('Invalid username or password. Please try again.');
-      setShowModal(true);
     }
   };
 
@@ -57,14 +61,17 @@ function Login() {
           <IonTitle>Login</IonTitle>
         </IonToolbar>
       </IonHeader>
+
       <IonContent className='ion-padding' fullscreen>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '40vh'
-        }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '40vh'
+          }}
+        >
           <IonIcon icon={tvOutline} style={{ fontSize: '80px', color: '#3880ff' }} />
           <h2 style={{ marginTop: '10px', color: '#3880ff' }}>Welcome Back!</h2>
         </div>
@@ -72,11 +79,11 @@ function Login() {
         <IonItem lines="full">
           <IonIcon icon={personCircleOutline} slot="start" style={{ fontSize: '24px', color: '#3880ff' }} />
           <IonInput
-            id="username"
-            placeholder="Enter Username"
+            id="email"
+            placeholder="Enter Email"
             clearInput
-            value={username}
-            onIonChange={(e) => setUsername(e.detail.value!)}
+            value={email}
+            onIonChange={(e) => setEmail(e.detail.value!)}
           />
         </IonItem>
 
@@ -104,7 +111,7 @@ function Login() {
 
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
           <p style={{ color: '#666' }}>
-            No account? 🙏 I gotchu bro 🤝 
+            No account? 🙏 I gotchu bro 🤝
             <span
               style={{ color: '#3880ff', cursor: 'pointer', textDecoration: 'underline' }}
               onClick={doRegister}
@@ -114,41 +121,39 @@ function Login() {
           </p>
         </div>
 
-        {/* Error Modal */}
-        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-          <IonContent>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '10px'
-            }}>
-              <IonIcon icon={keyOutline} style={{ fontSize: '90px', color: 'blue' }} />
-              <IonText style={{ color: 'white' }}>
-                <h3>{errorMessage}</h3>
-              </IonText>
-              <IonButton
-                onClick={() => setShowModal(false)}
-                color="light"
-                expand="block"
-                shape="round"
-                style={{ marginTop: '100px' }}
-              >
-                Close
-              </IonButton>
-            </div>
-          </IonContent>
-        </IonModal>
+       <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+  <IonContent>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        maxWidth: '300px',   
+        margin: '20% auto',  
+        padding: '20px',     
+        borderRadius: '12px', 
+        backgroundColor: '#3880ff', 
+        color: 'white',             
+      
+      }}
+    >
+      <IonIcon icon={keyOutline} style={{ fontSize: '50px', color: 'white', marginBottom: '10px' }} />
+      <IonText style={{ color: '#333', textAlign: 'center', marginBottom: '10px' }}>
+        <h3>{errorMessage}</h3>
+      </IonText>
+      <IonButton
+        onClick={() => setShowModal(false)}
+        color="light"
+        expand="block"
+        shape="round"
+      >
+        OK
+      </IonButton>
+    </div>
+  </IonContent>
+</IonModal>
 
-        {/* Alert Message */}
-        <IonAlert
-          isOpen={showAlert}
-          onDidDismiss={() => setShowAlert(false)}
-          header="Login Failed"
-          message={errorMessage}
-          buttons={['OK']}
-        />
 
         {/* Toast Message */}
         <IonToast
@@ -162,6 +167,6 @@ function Login() {
       </IonContent>
     </IonPage>
   );
-}
+};
 
 export default Login;
