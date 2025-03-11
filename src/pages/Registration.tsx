@@ -39,7 +39,7 @@ function Registration() {
     const confirmPassword = (document.getElementById("confirmPassword") as HTMLInputElement)?.value.trim();
 
     if (!email || !username || !password || !confirmPassword) {
-      setAlertMessage("Please fill in all fields before proceeding.");
+      setAlertMessage("Please fill in all input fields before proceeding.");
       setShowAlert(true);
       return;
     }
@@ -142,7 +142,7 @@ function Registration() {
               }}
             >
               <IonText style={{ textAlign: 'center', marginBottom: '10px' }}>
-                <h3>Confirm Your Details</h3>
+                <h3>Confirm Your Registration Details</h3>
                 <p><strong>Email:</strong> {registrationDetails.email}</p>
                 <p><strong>Username:</strong> {registrationDetails.username}</p>
               </IonText>
