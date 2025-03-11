@@ -139,7 +139,7 @@ const Login: React.FC = () => {
       }}
     >
       <IonIcon icon={keyOutline} style={{ fontSize: '50px', color: 'white', marginBottom: '10px' }} />
-      <IonText style={{ color: '#333', textAlign: 'center', marginBottom: '10px' }}>
+      <IonText style={{ color: '#white', textAlign: 'center', marginBottom: '10px' }}>
         <h3>{errorMessage}</h3>
       </IonText>
       <IonButton
