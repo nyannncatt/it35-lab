@@ -56,7 +56,7 @@ const Login: React.FC = () => {
   };
 
   const doRegister = () => {
-    navigation.push('/it35-lab/Registration', 'forward', 'replace');
+    navigation.push('/it35-lab/Registration', 'forward', );
   };
 
   return (
@@ -184,6 +184,7 @@ const Login: React.FC = () => {
             </div>
           </IonContent>
         </IonModal>
+         
 
  
         <IonToast
