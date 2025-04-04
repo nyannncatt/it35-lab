@@ -13,6 +13,7 @@ import {
 import { logoIonic } from 'ionicons/icons';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
+import Registration from './Registration';
 
 const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
   return (
@@ -104,7 +105,7 @@ const Login: React.FC = () => {
           Login
         </IonButton>
 
-        <IonButton routerLink="/it35-lab/register" expand="full" fill="clear" shape='round'>
+        <IonButton routerLink="/it35-lab/registration" expand="full" fill="clear" shape='round'>
           Don't have an account? Register here
         </IonButton>
 
