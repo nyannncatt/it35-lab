@@ -160,7 +160,7 @@ const FeedContainer = () => {
                 </IonCardHeader>
   
                 <IonCardContent>
-                  <IonText style={{ color: 'black' }}>
+                  <IonText style={{ color: 'white' }}>
                     <h1>{post.post_content}</h1>
                   </IonText>
                 </IonCardContent>
