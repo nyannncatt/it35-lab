@@ -46,7 +46,7 @@ const Register: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const handleOpenVerificationModal = () => {
-    if (!email.endsWith("@gmail.com")) {
+    if (!email.endsWith("@nbsc.edu.ph")) {
       setAlertMessage("Only @gmail for now emails are allowed to register.");
       setShowAlert(true);
       return;
