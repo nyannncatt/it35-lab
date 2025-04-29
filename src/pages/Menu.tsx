@@ -24,6 +24,7 @@ import Details from './Details';
     const path = [
         {name:'Home', url: '/it35-lab/app/home', icon: homeOutline},
         {name:'About', url: '/it35-lab/app/about', icon: rocketOutline},
+        
     ]
 
     return (

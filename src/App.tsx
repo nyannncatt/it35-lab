@@ -33,6 +33,10 @@ import '@ionic/react/css/palettes/dark.system.css';
 import './theme/variables.css';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
+import Registration from './pages/Registration';
+import regsus from './pages/regsus';
+
+
 
 setupIonicReact();
 
@@ -42,6 +46,10 @@ const App: React.FC = () => (
       <IonRouterOutlet>
         <Route exact path="/it35-lab" component={Login} />
         <Route path="/it35-lab/app" component={Menu} />
+        <Route path="/it35-lab/Registration" component={Registration} />
+        <Route path="/it35-lab/regsus" component={regsus} />
+        
+     
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
