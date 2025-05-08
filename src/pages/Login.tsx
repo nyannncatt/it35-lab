@@ -147,7 +147,7 @@ const Login: React.FC = () => {
     
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
           <p style={{ color: '#666' }}>
-            No account? 🙏 I gotchu bro 🤝
+           No account? 
             <span
               style={{ color: '#3880ff', cursor: 'pointer', textDecoration: 'underline' }}
               onClick={doRegister}
