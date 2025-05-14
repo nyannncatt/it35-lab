@@ -7,6 +7,7 @@ import {
       IonTitle, 
       IonToolbar 
   } from '@ionic/react';
+  //import FavoritesContainer from '../../components/FavoritesCointainer';
   
   const Favorites: React.FC = () => {
     return (
@@ -16,20 +17,11 @@ import {
             <IonButtons slot='start'>
               <IonMenuButton></IonMenuButton>
             </IonButtons>
-            <IonTitle>Favorites</IonTitle>
+            <IonTitle>Feed</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-          }}
-        >
-          Favorites
-        </div>
+         
         </IonContent>
       </IonPage>
     );

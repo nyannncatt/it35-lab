@@ -20,14 +20,14 @@ import {
     import { Route, Redirect } from 'react-router';
     import Favorites from './home-tabs/Favorites';
     import Feed from './home-tabs/Feed';
-    import Search from './home-tabs/Search'; 
+    import Weather from './home-tabs/Weather'; 
   
 import SchoolComSphere from './home-tabs/SchoolComSphere';
     
     const Home: React.FC = () => {
       const tabs = [
         {name:'Feed', tab:'feed',url: '/it35-lab/app/home/feed', icon: bookOutline},
-        {name:'Search', tab:'search', url: '/it35-lab/app/home/search', icon: search},
+        {name:'draft', tab:'weather', url: '/it35-lab/app/home/Weather', icon: search},
         {name:'Favorites',tab:'favorites', url: '/it35-lab/app/home/favorites', icon: star},
         //{name:'SchoolComSphere',tab:'schoolcomsphere', url: '/it35-lab/app/home/schoolcomsphere', icon: personOutline},
       ]
@@ -46,7 +46,7 @@ import SchoolComSphere from './home-tabs/SchoolComSphere';
           </IonTabBar>
         <IonRouterOutlet>
           <Route exact path="/it35-lab/app/home/feed" render={Feed} />
-          <Route exact path="/it35-lab/app/home/search" render={Search} />
+          <Route exact path="/it35-lab/app/home/weather" render={Weather} />
           <Route exact path="/it35-lab/app/home/favorites" render={Favorites} />
           <Route exact path="/it35-lab/app/home/schoolcomsphere" render={SchoolComSphere} />
           <Route exact path="/it35-lab/app/home">

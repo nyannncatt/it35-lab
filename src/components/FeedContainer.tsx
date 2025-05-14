@@ -1,13 +1,13 @@
+import { useState, useEffect } from 'react';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput,
   IonLabel, IonModal, IonFooter, IonCard, IonCardContent, IonCardHeader,
-  IonCardSubtitle, IonCardTitle, IonAvatar, IonCol, IonRow, IonIcon,
-  IonPopover, IonAlert, IonText
+  IonCardSubtitle, IonCardTitle, IonAlert, IonText, IonAvatar, IonCol,
+  IonRow, IonIcon, IonPopover
 } from '@ionic/react';
-import { useEffect, useState } from 'react';
-import { pencil } from 'ionicons/icons';
-import { supabase } from '../utils/supabaseClient';
 import { User } from '@supabase/supabase-js';
+import { supabase } from '../utils/supabaseClient';
+import { pencil } from 'ionicons/icons';
 
 interface Reactions {
   heart: number;
@@ -22,109 +22,32 @@ interface Post {
   avatar_url: string;
   post_content: string;
   post_created_at: string;
+  post_updated_at: string;
   reactions?: Reactions;
-  user_reactions?: {
-    [user_id: string]: keyof Reactions;
-  };
 }
 
-const style = document.createElement('style');
-style.textContent = `
-  /* General Theme */
-  body {
-    background-color: #1a1a2e;
-    color: #fff;
-  }
+// Shared violet-black styles
+const glowStyle = {
+  boxShadow: '0 0 12px violet',
+  backgroundColor: '#111',
+  color: 'white',
+  border: '1px solid violet',
+  borderRadius: '10px',
+};
 
-  .enhanced-card {
-    background: #2d2d52;
-    color: #fff;
-    box-shadow: 0 0 16px rgba(138, 43, 226, 0.7);
-    border-radius: 16px;
-    margin-bottom: 16px;
-  }
+const inputStyle = {
+  ...glowStyle,
+  padding: '12px',
+  marginBottom: '10px',
+};
 
-  .glow-avatar img {
-    box-shadow: 0 0 12px rgba(138, 43, 226, 0.6);
-    border-radius: 50%;
-  }
+const buttonStyle = {
+  ...glowStyle,
+  backgroundColor: 'black', // ✅ set background explicitly to black
+  padding: '8px 16px',
+  fontWeight: 'bold',
+};
 
-  /* Post Content */
-  ion-card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #d3a1f4;
-  }
-
-  ion-card-subtitle {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    color: #bba1e3;
-  }
-
-  .create-post {
-    background: #2c2c5c;
-    padding: 15px;
-    box-shadow: 0 0 12px rgba(138, 43, 226, 0.3);
-    border-radius: 16px;
-    margin-bottom: 20px;
-  }
-
-  /* Reaction Buttons */
-  .reaction-buttons ion-button {
-    --color: #d3a1f4;
-    --background: #3a3a7b;
-    --border-radius: 8px;
-    margin: 5px;
-  }
-
-  .reaction-buttons ion-button:hover {
-    --background: #4e4e98;
-  }
-
-  .reaction-buttons ion-button:focus {
-    --background: #6b6b9b;
-  }
-
-  /* Floating Emojis */
-  .floating-emoji {
-    position: fixed;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 32px;
-    animation: floatUp 1s ease-out forwards;
-    pointer-events: none;
-    z-index: 999;
-  }
-
-  @keyframes floatUp {
-    0% {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(-50%) translateY(-80px);
-      opacity: 0;
-    }
-  }
-
-  /* Buttons */
-  ion-button {
-    --background: #9b59b6;
-    --color: white;
-  }
-
-  ion-button:hover {
-    --background: #8e44ad;
-  }
-
-  ion-button:focus {
-    --background: #7318b3;
-  }
-`;
-
-document.head.appendChild(style);
 
 const FeedContainer = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -141,12 +64,12 @@ const FeedContainer = () => {
       const { data: authData } = await supabase.auth.getUser();
       if (authData?.user?.email?.endsWith('@nbsc.edu.ph')) {
         setUser(authData.user);
-        const { data: userData } = await supabase
+        const { data: userData, error } = await supabase
           .from('users')
           .select('user_id, username, user_avatar_url')
           .eq('user_email', authData.user.email)
           .single();
-        if (userData) {
+        if (!error && userData) {
           setUser({ ...authData.user, id: userData.user_id });
           setUsername(userData.username);
         }
@@ -154,8 +77,8 @@ const FeedContainer = () => {
     };
 
     const fetchPosts = async () => {
-      const { data } = await supabase.from('posts').select('*').order('post_created_at', { ascending: false });
-      if (data) setPosts(data as Post[]);
+      const { data, error } = await supabase.from('posts').select('*').order('post_created_at', { ascending: false });
+      if (!error) setPosts(data as Post[]);
     };
 
     fetchUser();
@@ -165,15 +88,20 @@ const FeedContainer = () => {
   const createPost = async () => {
     if (!postContent || !user || !username) return;
 
-    const { data: userData } = await supabase
+    const { data: userData, error: userError } = await supabase
       .from('users')
       .select('user_avatar_url')
       .eq('user_id', user.id)
       .single();
 
+    if (userError) {
+      console.error('Error fetching user avatar:', userError);
+      return;
+    }
+
     const avatarUrl = userData?.user_avatar_url || 'https://ionicframework.com/docs/img/demos/avatar.svg';
 
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('posts')
       .insert([
         {
@@ -181,16 +109,16 @@ const FeedContainer = () => {
           user_id: user.id,
           username,
           avatar_url: avatarUrl,
-          reactions: { heart: 0, haha: 0, wow: 0 },
-          user_reactions: {},
+          reactions: { heart: 0, haha: 0, wow: 0 }
         }
       ])
       .select('*');
 
-    if (data) {
+    if (!error && data) {
       setPosts([data[0] as Post, ...posts]);
-      setPostContent('');
     }
+
+    setPostContent('');
   };
 
   const deletePost = async (post_id: string) => {
@@ -206,13 +134,13 @@ const FeedContainer = () => {
 
   const savePost = async () => {
     if (!postContent || !editingPost) return;
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('posts')
       .update({ post_content: postContent })
       .match({ post_id: editingPost.post_id })
       .select('*');
 
-    if (data) {
+    if (!error && data) {
       const updatedPost = data[0] as Post;
       setPosts(posts.map(post => (post.post_id === updatedPost.post_id ? updatedPost : post)));
       setPostContent('');
@@ -223,46 +151,21 @@ const FeedContainer = () => {
   };
 
   const handleReaction = async (postId: string, type: keyof Reactions) => {
-    if (!user) return;
     const post = posts.find(p => p.post_id === postId);
     if (!post) return;
 
-    const currentReactions = post.reactions || { heart: 0, haha: 0, wow: 0 };
-    const currentUserReactions = post.user_reactions || {};
-    const userReactedType = currentUserReactions[user.id];
+    const updatedReactions = {
+      ...post.reactions,
+      [type]: (post.reactions?.[type] || 0) + 1,
+    };
 
-    let updatedReactions = { ...currentReactions };
-    let updatedUserReactions = { ...currentUserReactions };
-
-    if (userReactedType === type) {
-      updatedReactions[type] = Math.max((updatedReactions[type] || 0) - 1, 0);
-      delete updatedUserReactions[user.id];
-    } else {
-      if (userReactedType) {
-        updatedReactions[userReactedType] = Math.max((updatedReactions[userReactedType] || 1) - 1, 0);
-      }
-      updatedReactions[type] = (updatedReactions[type] || 0) + 1;
-      updatedUserReactions[user.id] = type;
-
-      const emojiMap = { heart: '❤️', haha: '😂', wow: '😮' };
-      const emoji = emojiMap[type];
-      const elem = document.createElement('div');
-      elem.className = 'floating-emoji';
-      elem.innerText = emoji;
-      document.body.appendChild(elem);
-      setTimeout(() => elem.remove(), 1000);
-    }
-
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('posts')
-      .update({
-        reactions: updatedReactions,
-        user_reactions: updatedUserReactions
-      })
+      .update({ reactions: updatedReactions })
       .eq('post_id', postId)
       .select('*');
 
-    if (data) {
+    if (!error && data) {
       const updatedPost = data[0] as Post;
       setPosts(posts.map(p => (p.post_id === postId ? updatedPost : p)));
     }
@@ -270,31 +173,46 @@ const FeedContainer = () => {
 
   return (
     <>
-      <IonContent className="ion-padding">
+      <IonContent style={{ backgroundColor: 'violet', color: 'white' }}>
         {user ? (
           <>
-            <IonCard className="create-post">
-              <IonCardHeader>
-                <IonCardTitle>Create Post</IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                <IonInput
-                  value={postContent}
-                  onIonChange={e => setPostContent(e.detail.value!)}
-                  placeholder="Write a post..."
-                />
-              </IonCardContent>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem' }}>
-                <IonButton onClick={createPost}>Post</IonButton>
-              </div>
+        <IonCard style={glowStyle}>
+          <IonCardHeader>
+            <IonCardTitle>Create Post</IonCardTitle>
+          </IonCardHeader>
+            <IonCardContent>
+            <IonInput
+              style={inputStyle}
+              value={postContent}
+              onIonChange={e => setPostContent(e.detail.value!)}
+              placeholder="Write a post..."
+              className="custom-glow-input"
+            />
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+              <IonButton
+              onClick={createPost}
+              expand="block"
+              shape="round"
+              style={{
+                transition: 'all 0.3s ease',
+                '--background': 'violet', // Set background to violet
+                '--color': 'white',
+                '--border-radius': '20px',
+                '--box-shadow': '0 0 20px violet', // Violet glow
+              }}
+              >
+              Post
+              </IonButton>
+            </div>
+            </IonCardContent>
             </IonCard>
 
             {posts.map(post => (
-              <IonCard key={post.post_id} className="enhanced-card">
+              <IonCard key={post.post_id} style={{ marginTop: '2rem', ...glowStyle }}>
                 <IonCardHeader>
                   <IonRow>
                     <IonCol size="1.85">
-                      <IonAvatar className="glow-avatar">
+                      <IonAvatar>
                         <img alt={post.username} src={post.avatar_url} />
                       </IonAvatar>
                     </IonCol>
@@ -313,59 +231,61 @@ const FeedContainer = () => {
                           })
                         }
                       >
-                        <IonIcon icon={pencil} />
+                        <IonIcon style={{ color: 'white' }} icon={pencil} />
                       </IonButton>
                     </IonCol>
                   </IonRow>
                 </IonCardHeader>
 
                 <IonCardContent>
-                  <IonText>
-                    <h2>{post.post_content}</h2>
+                  <IonText style={{ color: 'white' }}>
+                    <p>{post.post_content}</p>
                   </IonText>
 
-                  <IonRow className="reaction-buttons">
-                    <IonButton fill="clear" onClick={() => handleReaction(post.post_id, 'heart')}>
+                  <IonRow>
+                    <IonButton style={buttonStyle} fill="clear" onClick={() => handleReaction(post.post_id, 'heart')}>
                       ❤️ {post.reactions?.heart || 0}
                     </IonButton>
-                    <IonButton fill="clear" onClick={() => handleReaction(post.post_id, 'haha')}>
+                    <IonButton style={buttonStyle} fill="clear" onClick={() => handleReaction(post.post_id, 'haha')}>
                       😂 {post.reactions?.haha || 0}
                     </IonButton>
-                    <IonButton fill="clear" onClick={() => handleReaction(post.post_id, 'wow')}>
+                    <IonButton style={buttonStyle} fill="clear" onClick={() => handleReaction(post.post_id, 'wow')}>
                       😮 {post.reactions?.wow || 0}
                     </IonButton>
-                    </IonRow>
-                  </IonCardContent>
+                  </IonRow>
+                </IonCardContent>
 
-                  <IonPopover
-                    isOpen={popoverState.open && popoverState.postId === post.post_id}
-                    event={popoverState.event}
-                    onDidDismiss={() =>
-                      setPopoverState({ open: false, event: null, postId: null })
-                    }
+                <IonPopover
+                  isOpen={popoverState.open && popoverState.postId === post.post_id}
+                  event={popoverState.event}
+                  onDidDismiss={() =>
+                    setPopoverState({ open: false, event: null, postId: null })
+                  }
+                >
+                  <IonButton
+                    fill="clear"
+                    style={buttonStyle}
+                    onClick={() => {
+                      startEditingPost(post);
+                      setPopoverState({ open: false, event: null, postId: null });
+                    }}
                   >
-                    <IonButton
-                      fill="clear"
-                      onClick={() => {
-                        startEditingPost(post);
-                        setPopoverState({ open: false, event: null, postId: null });
-                      }}
-                    >
-                      Edit
-                    </IonButton>
-                    <IonButton
-                      fill="clear"
-                      color="danger"
-                      onClick={() => {
-                        deletePost(post.post_id);
-                        setPopoverState({ open: false, event: null, postId: null });
-                      }}
-                    >
-                      Delete
-                    </IonButton>
-                  </IonPopover>
-                </IonCard>
-              ))}
+                    Edit
+                  </IonButton>
+                  <IonButton
+                    fill="clear"
+                    color="danger"
+                    style={buttonStyle}
+                    onClick={() => {
+                      deletePost(post.post_id);
+                      setPopoverState({ open: false, event: null, postId: null });
+                    }}
+                  >
+                    Delete
+                  </IonButton>
+                </IonPopover>
+              </IonCard>
+            ))}
           </>
         ) : (
           <IonLabel>Loading...</IonLabel>
@@ -373,21 +293,22 @@ const FeedContainer = () => {
       </IonContent>
 
       <IonModal isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>
-        <IonHeader>
+        <IonHeader style={{ ...glowStyle, backgroundColor: 'black' }}>
           <IonToolbar>
             <IonTitle>Edit Post</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonContent>
+        <IonContent style={{ backgroundColor: 'black' }}>
           <IonInput
+            style={inputStyle}
             value={postContent}
             onIonChange={e => setPostContent(e.detail.value!)}
             placeholder="Edit your post..."
           />
         </IonContent>
-        <IonFooter>
-          <IonButton onClick={savePost}>Save</IonButton>
-          <IonButton onClick={() => setIsModalOpen(false)}>Cancel</IonButton>
+        <IonFooter style={{ backgroundColor: 'black', padding: '1rem' }}>
+          <IonButton style={buttonStyle} onClick={savePost}>Save</IonButton>
+          <IonButton style={buttonStyle} onClick={() => setIsModalOpen(false)}>Cancel</IonButton>
         </IonFooter>
       </IonModal>
 

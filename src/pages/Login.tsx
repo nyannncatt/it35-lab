@@ -19,6 +19,12 @@ import {
   IonAlert
 } from '@ionic/react';
 
+// Set violet background for the whole page
+document.body.style.background = 'linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)';
+
+// Inline style for violet background
+document.body.style.background = 'linear-gradient(135deg, #8a2be2 0%, #9b59b6 100%)';
+
 import { 
   keyOutline, 
   personCircleOutline, 
@@ -93,9 +99,9 @@ const Login: React.FC = () => {
           <IonIcon 
             icon={tvOutline} 
             style={{ 
-                      fontSize: '80px',
-                      color: '#9b59b6',
-                      filter: 'drop-shadow(0 0 8px #8a2be2)',
+              fontSize: '80px', 
+              color: '#9b59b6', 
+              filter: 'drop-shadow(0 0 30px #8a2be2)', // glow effect
               textShadow: '0 0 30px #8a2be2'
             }} 
           />
