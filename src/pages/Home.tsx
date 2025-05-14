@@ -16,7 +16,7 @@ import {
         IonToolbar 
     } from '@ionic/react';
     import { IonReactRouter } from '@ionic/react-router';
-    import { bookOutline, personOutline, search, star } from 'ionicons/icons';
+    import { bookOutline, personOutline, search, star, sunnyOutline } from 'ionicons/icons';
     import { Route, Redirect } from 'react-router';
     import Favorites from './home-tabs/Favorites';
     import Feed from './home-tabs/Feed';
@@ -27,7 +27,7 @@ import SchoolComSphere from './home-tabs/SchoolComSphere';
     const Home: React.FC = () => {
       const tabs = [
         {name:'Feed', tab:'feed',url: '/it35-lab/app/home/feed', icon: bookOutline},
-        {name:'draft', tab:'weather', url: '/it35-lab/app/home/Weather', icon: search},
+        {name:'Weather', tab:'weather', url: '/it35-lab/app/home/Weather', icon: sunnyOutline},
         {name:'Favorites',tab:'favorites', url: '/it35-lab/app/home/favorites', icon: star},
         //{name:'SchoolComSphere',tab:'schoolcomsphere', url: '/it35-lab/app/home/schoolcomsphere', icon: personOutline},
       ]
