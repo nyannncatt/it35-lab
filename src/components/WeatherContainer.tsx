@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 // Inline styles
 const styles = {
   container: {
     fontFamily: 'Segoe UI, sans-serif',
-    background: 'linear-gradient(135deg,rgb(200, 82, 216),rgb(26, 23, 209))',
+    background: 'linear-gradient(135deg, rgb(200, 82, 216), rgb(26, 23, 209))',
     padding: '40px 20px',
     borderRadius: '20px',
-    boxShadow: '0 10px 30px rgba(73, 6, 6, 0.2)',
-    width: '1000%',
-    maxWidth: '1000px',
+    boxShadow: '0 10px 50px #9b59b6',
+    width: '600%',
+    maxWidth: '600px',
     margin: '50px auto',
     color: '#fff',
     textAlign: 'center' as const,
@@ -18,7 +19,7 @@ const styles = {
   },
   input: {
     padding: '10px',
-    width: '80%',
+    width: '70%',
     borderRadius: '10px',
     border: 'none',
     marginBottom: '20px',
@@ -137,12 +138,36 @@ const WeatherContainer = () => {
         />
         <button onClick={handleSearch} style={styles.button}>Search</button>
 
-        <h2 style={styles.header}>Weather in {weatherData.name}</h2>
+        <h2 style={styles.header}>Weather in {weatherData.name}, {weatherData.sys.country}</h2>
         <img src={iconUrl} alt="Weather Icon" style={styles.icon} />
-        <p style={styles.paragraph}>Temperature: {weatherData.main.temp}°C</p>
-        <p style={styles.paragraph}>Condition: {weatherData.weather[0].description}</p>
-        <p style={styles.paragraph}>Humidity: {weatherData.main.humidity}%</p>
-        <p style={styles.paragraph}>Wind: {weatherData.wind.speed} m/s</p>
+        <p style={styles.paragraph}>
+          <span role="img" aria-label="clock">🕒</span> Local Time: {moment.unix(weatherData.dt).format('dddd, MMMM Do YYYY, h:mm A')}
+        </p>
+        <p style={styles.paragraph}>
+          <span role="img" aria-label="thermometer">🌡️</span> Temperature: {weatherData.main.temp}°C
+        </p>
+        
+        <p style={styles.paragraph}>
+          <span role="img" aria-label="condition">🌥️</span> Condition: {weatherData.weather[0].description.replace(/\b\w/g, (c: string) => c.toUpperCase())}
+        </p>
+        <p style={styles.paragraph}>
+          <span role="img" aria-label="humidity">💧</span> Humidity: {weatherData.main.humidity}%
+        </p>
+        <p style={styles.paragraph}>
+          <span role="img" aria-label="wind">💨</span> Wind: {weatherData.wind.speed} m/s
+        </p>
+        <p style={styles.paragraph}>
+          <span role="img" aria-label="pressure">🔽</span> Pressure: {weatherData.main.pressure} hPa
+        </p>
+        <p style={styles.paragraph}>
+          <span role="img" aria-label="visibility">👁️</span> Visibility: {weatherData.visibility / 1000} km
+        </p>
+        <p style={styles.paragraph}>
+          <span role="img" aria-label="sunrise">🌅</span> Sunrise: {moment.unix(weatherData.sys.sunrise).format('hh:mm A')}
+        </p>
+        <p style={styles.paragraph}>
+          <span role="img" aria-label="sunset">🌇</span> Sunset: {moment.unix(weatherData.sys.sunset).format('hh:mm A')}
+        </p>
       </div>
     </>
   );

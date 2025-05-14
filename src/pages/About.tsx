@@ -10,24 +10,25 @@ import {
 } from '@ionic/react';
 
 // Shared violet-black styles
-const glowStyle = {
-  boxShadow: '0 0 12px violet',
+const glowStyle: React.CSSProperties = {
+  //boxShadow: '0 0 12px violet',
   backgroundColor: '#111',
   color: 'white',
   border: '1px solid violet',
   borderRadius: '10px',
   padding: '10px',
+  textAlign: 'center', // Center align the text
 };
 
 const About: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton></IonMenuButton>
+        <IonToolbar style={{ '--background': '#9b59b6' }}>
+          <IonButtons slot="start" style={{ color: 'black' }}>
+            <IonMenuButton />
           </IonButtons>
-          <IonTitle>About</IonTitle>
+          <IonTitle style={{ color: 'black', }}>ℹ️ About</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -76,7 +77,7 @@ const About: React.FC = () => {
 
             <h3 style={glowStyle}>Changes Made:</h3>
 
-            <ul style={{ listStyleType: 'circle', color: 'white' }}>
+            <ul style={{ listStyleType: 'circle', color: 'white', textAlign: 'center', padding: 0 }}>
               <li>Log in</li>
               <li>Sign Up</li>
               <li>Edit Profile</li>
@@ -90,7 +91,7 @@ const About: React.FC = () => {
             </p>
 
             <h3 style={glowStyle}>Read More</h3>
-            <p style={{ color: 'white' }}>
+            <p style={{ color: 'white', textAlign: 'center' }}>
               For more information about the development process and how the features are implemented, you can explore 
               the documentation or contact the development team.
             </p>
