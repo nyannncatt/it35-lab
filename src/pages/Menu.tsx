@@ -27,6 +27,7 @@ import { useState } from 'react';
 import EditProfile from './EditProfile';
 
 
+
   const Menu: React.FC = () => {
     const navigation = useIonRouter();
     const [showAlert, setShowAlert] = useState(false);
@@ -72,11 +73,16 @@ import EditProfile from './EditProfile';
                             </IonMenuToggle>
                         ))}
 
-                       {/* Logout Button */}
-                       <IonButton expand="full" onClick={handleLogout}>
-                            <IonIcon icon={logOutOutline} slot="start"></IonIcon>
-                            Logout
-                        </IonButton>
+                    {/* Logout Button */}
+                    <IonButton
+                        expand="full"
+                        onClick={handleLogout}
+                        color="#9b59b6"
+                        style={{ backgroundColor: '#9b59b6', color: 'black', marginTop: 'auto', marginBottom: '20px' }}
+                    >
+                        <IonIcon icon={logOutOutline} slot="start" style={{ color: 'black' }}></IonIcon>
+                        Logout
+                    </IonButton>
                         
                     </IonContent>
                 </IonMenu>

@@ -48,6 +48,8 @@ const inputStyle = {
   ...glowStyle,
   padding: '12px',
   marginBottom: '10px',
+    '--highlight-color-focused': '#9b59b6',
+
 };
 
 const buttonStyle = {
@@ -250,18 +252,35 @@ const FeedContainer = () => {
       <IonContent style={{ backgroundColor: 'violet', color: 'white' }}>
         {user ? (
           <>
-            <IonCard style={glowStyle}>
-              <IonCardHeader>
-                <IonCardTitle>Create Post</IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                <IonInput
-                  style={inputStyle}
-                  value={postContent}
-                  onIonChange={e => setPostContent(e.detail.value!)}
-                  placeholder="Write a post..."
-                  className="custom-glow-input"
-                />
+        <IonCard
+          style={{
+            ...glowStyle,
+            animation: 'glowPulse 1.5s infinite alternate',
+          }}
+        >
+          <IonCardHeader>
+            <IonCardTitle>Create Post</IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>
+            <IonInput
+          style={inputStyle}
+          value={postContent}
+          onIonChange={e => setPostContent(e.detail.value!)}
+          placeholder="Write a post..."
+          className="custom-glow-input"
+            />
+            <style>
+          {`
+            @keyframes glowPulse {
+              0% {
+            box-shadow: 0 0 12px 2px violet, 0 0 0px 0px #fff;
+              }
+              100% {
+            box-shadow: 0 0 24px 8px violet, 0 0 10px 2px #fff;
+              }
+            }
+          `}
+            </style>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
                   <IonButton
                     onClick={createPost}
@@ -270,9 +289,9 @@ const FeedContainer = () => {
                     style={{
                       transition: 'all 0.3s ease',
                       '--background': 'violet',
-                      '--color': 'white',
+                      '--color': 'black',
                       '--border-radius': '20px',
-                      '--box-shadow': '0 0 20px violet',
+                      //'--box-shadow': '0 0 20px violet',
                     }}
                   >
                     Post
@@ -280,9 +299,12 @@ const FeedContainer = () => {
                 </div>
               </IonCardContent>
             </IonCard>
+            <br />
+              
 
             {posts.map(post => (
-              <IonCard key={post.post_id} style={{ marginTop: '2rem', ...glowStyle }}>
+<IonCard key={post.post_id} style={{ marginTop: '2rem', marginBottom: '8rem', ...glowStyle }}>
+  
                 <IonCardHeader>
                   <IonRow>
                     <IonCol size="1.85">
@@ -305,6 +327,7 @@ const FeedContainer = () => {
                           })
                         }
                       >
+                        
                         <IonIcon style={{ color: 'white' }} icon={pencil} />
                       </IonButton>
                     </IonCol>
@@ -312,9 +335,11 @@ const FeedContainer = () => {
                 </IonCardHeader>
 
                 <IonCardContent>
-                  <IonText style={{ color: 'white' }}>
-                    <p>{post.post_content}</p>
+                  <IonText style={{ color: 'violet' }}>
+                    <br></br>
+                    <p style={{ fontSize: '20px' }}>{post.post_content}</p>
                   </IonText>
+                   <br></br>
 
                   <IonRow>
                     <IonButton style={buttonStyle} fill="clear" onClick={() => handleReaction(post.post_id, 'heart')}>
@@ -335,53 +360,97 @@ const FeedContainer = () => {
                     placeholder="Write a comment..."
                     className="custom-glow-input"
                   />
-                    <IonButton
-                    style={{
-                      ...buttonStyle,
-                      '--background': 'violet',
-                      '--color': 'white',
-                      '--border-radius': '20px',
-                      '--box-shadow': '0 0 20px violet',
-                      marginTop: '10px',
-                    }}
-                    expand="block"
-                    onClick={() => createComment(post.post_id)}
-                    >
-                    Comment
-                    </IonButton>
+                   <IonButton
+  style={{
+    '--background': 'violet',
+    '--color': 'black',
+    '--border-radius': '20px',
+    //'--box-shadow': '0 0 10px violet',
+    marginTop: '10px',
+    color: 'black',
+  }}
+  expand="block"
+  onClick={() => createComment(post.post_id)}
+>
+  <span style={{ color: 'black' }}>Comment</span>
+</IonButton>
 
-                  <div>
+<IonText style={{ color: 'white', marginTop: '1rem', fontWeight: 'bold', fontSize: '1.2rem' }}>
+  <br />
+  
+  <p>Comments Section:</p>
+</IonText>
+
+
+                    <div
+                    style={{
+                      maxWidth: '1150px',
+                      margin: '0 auto',
+                      width: '100vw',
+                      minWidth: '100vw',
+                      overflowX: 'hidden',
+                      position: 'relative',
+                    }}
+                    >
                     {comments[post.post_id]?.map((comment) => (
-                      <IonCard key={comment.comment_id} style={{ marginTop: '1rem', ...glowStyle }}>
-                        <IonCardHeader>
+                      <IonCard
+                      key={comment.comment_id}
+                      style={{
+                        marginTop: '0.5rem',
+                        ...glowStyle,
+                        maxWidth: '420px',
+                        minHeight: '60px',
+                        padding: '6px',
+                        width: '100%',
+                        boxSizing: 'border-box',
+                      }}
+                      >
+                        <IonCardHeader style={{ padding: '6px' }}>
                           <IonRow>
-                            <IonCol size="1.85">
+                            <IonCol size="4.21">
                               <IonAvatar>
                                 <img alt={comment.username} src={comment.avatar_url} />
                               </IonAvatar>
                             </IonCol>
                             <IonCol>
-                              <IonCardTitle>{comment.username}</IonCardTitle>
-                              <IonCardSubtitle>{new Date(comment.comment_created_at).toLocaleString()}</IonCardSubtitle>
+                              <IonCardTitle style={{ fontSize: '1rem' }}>{comment.username}</IonCardTitle>
+                              <IonCardSubtitle style={{ fontSize: '0.7rem' }}>
+                                {new Date(comment.comment_created_at).toLocaleString()}
+                              </IonCardSubtitle>
                             </IonCol>
                           </IonRow>
                         </IonCardHeader>
-
-                        <IonCardContent>
-                          <IonText style={{ color: 'white' }}>
-                            <p>{comment.comment_content}</p>
+                        <IonCardContent style={{ padding: 'px' }}>
+                          <IonText style={{ color: 'white', fontSize: '0.95rem' }}>
+                            <p style={{ margin: 2, }}>{comment.comment_content}</p>
                           </IonText>
                         </IonCardContent>
                       </IonCard>
                     ))}
                   </div>
+                  <IonText style={{ textAlign: 'center', marginBottom: '1.5rem', color: 'white', fontStyle: 'italic' }}>
+  — End of post —
+</IonText>
+
                 </IonCardContent>
+              
+
               </IonCard>
             ))}
+            <IonText style={{ textAlign: 'center', marginBottom: '1.5rem', color: 'white', fontStyle: 'italic' }}>
+  — End of post —
+</IonText>
+
+
+              <br />
+                <br />
           </>
+          
         ) : (
+          
           <IonLabel>Loading...</IonLabel>
         )}
+        
       </IonContent>
 
       <IonModal isOpen={isModalOpen} onDidDismiss={() => setIsModalOpen(false)}>
@@ -399,24 +468,73 @@ const FeedContainer = () => {
   />
 </IonContent>
 <IonFooter>
-  <IonButton onClick={savePost} style={buttonStyle}>Save</IonButton>
+  <IonButton
+    onClick={savePost}
+     style={{
+      //...buttonStyle,
+      marginLeft: '10px',
+      backgroundColor: 'violet',
+      borderRadius: '20px',
+      color: 'black',
+      //boxShadow: '0 0 16px 4px violet',
+      border: '1px solid violet',
+    }}
+    color="violet"
+
+  >
+    Save RN
+  </IonButton>
+  <IonButton
+    onClick={() => {
+      setIsModalOpen(false);
+      setEditingPost(null);
+      setPostContent('');
+    }}
+    style={{
+      //...buttonStyle,
+      marginLeft: '10px',
+      backgroundColor: 'violet',
+      borderRadius: '20px',
+      color: 'black',
+      //boxShadow: '0 0 16px 4px violet',
+      border: '1px solid violet',
+    }}
+    color="violet"
+  >
+    Cancel
+  </IonButton>
 </IonFooter>
 </IonModal>
   <IonPopover
-    isOpen={popoverState.open}
-    event={popoverState.event}
-    onDidDismiss={() => setPopoverState({ ...popoverState, open: false })}
+  isOpen={popoverState.open}
+  event={popoverState.event}
+  onDidDismiss={() => setPopoverState({ ...popoverState, open: false })}
+>
+  <IonButton
+    fill="clear"
+    onClick={() => {
+      const postToEdit = posts.find(post => post.post_id === popoverState.postId);
+      if (postToEdit) {
+        startEditingPost(postToEdit); // <-- This opens the modal and fills the input
+      }
+      setPopoverState({ ...popoverState, open: false });
+    }}
   >
-    <IonButton
-      fill="clear"
-      onClick={() => {
-        deletePost(popoverState.postId!);
-        setPopoverState({ ...popoverState, open: false });
-      }}
-    >
-      Delete Post
-    </IonButton>
-  </IonPopover>
+    Edit Post
+  </IonButton>
+  
+  <IonButton
+    fill="clear"
+    color="danger"
+    onClick={() => {
+      deletePost(popoverState.postId!);
+      setPopoverState({ ...popoverState, open: false });
+    }}
+  >
+    Delete Post
+  </IonButton>
+</IonPopover>
+
 
   <IonAlert
     isOpen={isAlertOpen}

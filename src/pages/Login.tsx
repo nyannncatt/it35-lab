@@ -20,10 +20,10 @@ import {
 } from '@ionic/react';
 
 // Set violet background for the whole page
-document.body.style.background = 'linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)';
+document.body.style.background = '#9b59b6';
 
 // Inline style for violet background
-document.body.style.background = 'linear-gradient(135deg, #8a2be2 0%, #9b59b6 100%)';
+document.body.style.background = '#9b59b6)';
 
 import { 
   keyOutline, 
