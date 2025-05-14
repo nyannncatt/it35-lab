@@ -7,9 +7,9 @@ import {
       IonTitle, 
       IonToolbar 
   } from '@ionic/react';
-  import FeedContainer from '../../components/FeedContainer';
+  import TaskManagerContainer from '../../components/TaskManagerContainer';
   
-  const Feed: React.FC = () => {
+  const TaskManager: React.FC = () => {
     return (
       <IonPage>
         <IonHeader>
@@ -17,14 +17,14 @@ import {
             <IonButtons slot='start'>
               <IonMenuButton></IonMenuButton>
             </IonButtons>
-            <IonTitle style={{ color: 'violet' }}>📰 Feed</IonTitle>
+            <IonTitle>Feed</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
-          <FeedContainer />
+              <TaskManagerContainer />
         </IonContent>
       </IonPage>
     );
   };
   
-  export default Feed;
+  export default TaskManager;

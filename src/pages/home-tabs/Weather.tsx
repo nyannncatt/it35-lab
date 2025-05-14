@@ -18,7 +18,7 @@ import {
             <IonButtons slot='start'>
               <IonMenuButton></IonMenuButton>
             </IonButtons>
-            <IonTitle>Feed</IonTitle>
+            <IonTitle style={{ color: 'violet' }}>☁️ Weather</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>

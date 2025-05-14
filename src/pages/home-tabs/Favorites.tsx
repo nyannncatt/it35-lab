@@ -27,12 +27,12 @@ const Favorites: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+            <IonToolbar style={{ backgroundColor: '#111' }}>
             <IonButtons slot="start" style={{ color: 'violet' }}>
-            <IonMenuButton></IonMenuButton>
-          </IonButtons>
-          <IonTitle>Favorites</IonTitle>
-        </IonToolbar>
+              <IonMenuButton></IonMenuButton>
+            </IonButtons>
+            <IonTitle>⭐ Favorites</IonTitle>
+            </IonToolbar>
       </IonHeader>
       
       <IonContent fullscreen style={{ backgroundColor: '#121212' }}>

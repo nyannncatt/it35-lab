@@ -9,8 +9,8 @@ const styles = {
     padding: '40px 20px',
     borderRadius: '20px',
     boxShadow: '0 10px 30px rgba(73, 6, 6, 0.2)',
-    width: '100%',
-    maxWidth: '400px',
+    width: '1000%',
+    maxWidth: '1000px',
     margin: '50px auto',
     color: '#fff',
     textAlign: 'center' as const,
@@ -79,7 +79,7 @@ const animationStyle = `
 `;
 
 const WeatherContainer = () => {
-  const [city, setCity] = useState('London');
+  const [city, setCity] = useState('Cagayan De Oro');
   const [searchCity, setSearchCity] = useState('');
   const [weatherData, setWeatherData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
