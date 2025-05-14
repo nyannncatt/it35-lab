@@ -214,24 +214,24 @@ const Login: React.FC = () => {
 
         {/* Register Link */}
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
-          <p
+            <p
             style={{
-              color: '#666',
+              color: '#9b59b6',
             }}
-          >
+            >
             No account?
             <span
               style={{
-          color: '#9b59b6',
-          cursor: 'pointer',
-          textDecoration: 'underline',
-          marginLeft: '5px'
+              color: '#9b59b6',
+              cursor: 'pointer',
+              textDecoration: 'underline',
+              marginLeft: '5px'
               }}
               onClick={doRegister}
             >
               Register here
             </span>
-          </p>
+            </p>
         </div>
 
         <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
