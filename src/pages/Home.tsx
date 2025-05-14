@@ -29,7 +29,7 @@ import SchoolComSphere from './home-tabs/SchoolComSphere';
         {name:'Feed', tab:'feed',url: '/it35-lab/app/home/feed', icon: bookOutline},
         {name:'Search', tab:'search', url: '/it35-lab/app/home/search', icon: search},
         {name:'Favorites',tab:'favorites', url: '/it35-lab/app/home/favorites', icon: star},
-        {name:'SchoolComSphere',tab:'schoolcomsphere', url: '/it35-lab/app/home/schoolcomsphere', icon: personOutline},
+        //{name:'SchoolComSphere',tab:'schoolcomsphere', url: '/it35-lab/app/home/schoolcomsphere', icon: personOutline},
       ]
       return (
         

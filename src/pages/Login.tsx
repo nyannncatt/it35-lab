@@ -22,14 +22,12 @@ import {
 import { 
   keyOutline, 
   personCircleOutline, 
-  tvOutline, 
-  eyeOutline, 
-  eyeOffOutline 
+  tvOutline 
 } from 'ionicons/icons';
 
 import { useState } from 'react';
 import Registration from './Registration';
-import { supabase } from '../utils/supabaseClient'
+import { supabase } from '../utils/supabaseClient';
 
 const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
   return (
@@ -88,68 +86,125 @@ const Login: React.FC = () => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '40vh'
+            height: '40vh',
+            marginBottom: '20px',
           }}
         >
-          <IonIcon icon={tvOutline} style={{ fontSize: '80px', color: '#3880ff' }} />
-          <h2 style={{ marginTop: '10px', color: '#3880ff' }}>Welcome Back!</h2>
+          <IonIcon 
+            icon={tvOutline} 
+            style={{ 
+                      fontSize: '80px',
+                      color: '#9b59b6',
+                      filter: 'drop-shadow(0 0 8px #8a2be2)',
+              textShadow: '0 0 30px #8a2be2'
+            }} 
+          />
+          <h2 
+            style={{ 
+              marginTop: '10px', 
+              color: '#9b59b6', 
+              filter: 'drop-shadow(0 0 20px #8a2be2)', // glow effect
+              textShadow: '0 0 20px #8a2be2'
+            }}
+          >
+            Welcome Back!
+          </h2>
         </div>
 
-       
-        <IonItem lines="full">
+        {/* Email Input */}
+        <IonItem 
+          lines="full" 
+          style={{ 
+            marginBottom: '15px', 
+            borderRadius: '10px', 
+            backgroundColor: '#3a3a7b',
+            boxShadow: '0 0 10px rgba(138, 43, 226, 0.7)' 
+          }}
+        >
           <IonIcon 
             icon={personCircleOutline} 
             slot="start" 
-            style={{ fontSize: '24px', color: '#3880ff' }} 
+            style={{ fontSize: '24px', color: '#9b59b6' }} 
           />
           <IonInput
-            type = "email"
+            type="email"
             placeholder="Enter Email"
-          
             value={email}
             onIonChange={(e) => setEmail(e.detail.value!)}
+            style={{
+              padding: '10px',
+              color: '#fff',
+              textShadow: '0 0 10px #8a2be2, 0 0 20px #9b59b6', // glow effect for input text
+            }}
           />
         </IonItem>
 
-    
-        <IonItem lines="full">
+        {/* Password Input */}
+        <IonItem 
+          lines="full" 
+          style={{
+            marginBottom: '20px',
+            borderRadius: '10px', 
+            backgroundColor: '#3a3a7b',
+            boxShadow: '0 0 10px rgba(138, 43, 226, 0.7)',
+          }}
+        >
           <IonIcon 
             icon={keyOutline} 
             slot="start" 
-            style={{ fontSize: '24px', color: '#3880ff' }} 
+            style={{ fontSize: '24px', color: '#9b59b6' }} 
           />
-
           <IonInput
-           
-            type= "password"
+            type="password"
             placeholder="Enter Password"
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
+            style={{
+              //border: '1px solid #9b59b6',
+              //borderRadius: '10px',
+              padding: '10px',
+              color: '#fff',
+              //backgroundColor: '#3a3a7b',
+            }}
           >
-              
-              <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+            <IonInputPasswordToggle slot="end" />
           </IonInput>
-
-          
         </IonItem>
 
-     
+        {/* Login Button */}
         <IonButton
           onClick={doLogin}
           expand="block"
           shape="round"
-          color="primary"
-          style={{ marginTop: '20px' }}
+          style={{
+            marginTop: '20px',
+            borderRadius: '20px',
+            boxShadow: '0 0 20px rgba(138, 43, 226, 0.7)',
+            transition: 'all 0.3s ease',
+            // Custom background color using CSS variable
+            '--background': '#9b59b6',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 0 25px rgba(138, 43, 226, 0.7)')}
+          onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 0 20px rgba(138, 43, 226, 0.7)')}
         >
           Login
         </IonButton>
 
-    
+        {/* Register Link */}
         <div style={{ textAlign: 'center', marginTop: '15px' }}>
-          <p style={{ color: '#666' }}>
+          <p
+            style={{
+              color: '#666',
+            }}
+          >
             No account?
             <span
-              style={{ color: '#3880ff', cursor: 'pointer', textDecoration: 'underline' }}
+              style={{
+          color: '#9b59b6',
+          cursor: 'pointer',
+          textDecoration: 'underline',
+          marginLeft: '5px'
+              }}
               onClick={doRegister}
             >
               Register here
@@ -157,20 +212,19 @@ const Login: React.FC = () => {
           </p>
         </div>
 
-   
         <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
 
-{/* IonToast for success message */}
-<IonToast
-  isOpen={showToast}
-  onDidDismiss={() => setShowToast(false)}
-  message="Login successful! Redirecting..."
-  duration={1500}
-  position="top"
-  color="primary"
-/>
-</IonContent>
-</IonPage>
+        {/* IonToast for success message */}
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Login successful! Redirecting..."
+          duration={1500}
+          position="top"
+          color="primary"
+        />
+      </IonContent>
+    </IonPage>
   );
 };
 
