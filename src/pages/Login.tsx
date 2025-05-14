@@ -77,11 +77,11 @@ const Login: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="primary">
+        <IonToolbar style={{ '--background': '#9b59b6' }}>
           <IonButtons slot='start'>
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Login</IonTitle>
+            <IonTitle style={{ color: 'black' }}>Login</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -113,7 +113,7 @@ const Login: React.FC = () => {
               textShadow: '0 0 20px #8a2be2'
             }}
           >
-            Welcome Back!
+            Welcome to my AppdevFinalApp!
           </h2>
         </div>
 
@@ -124,8 +124,16 @@ const Login: React.FC = () => {
             marginBottom: '15px', 
             borderRadius: '10px', 
             backgroundColor: '#3a3a7b',
-            boxShadow: '0 0 10px rgba(138, 43, 226, 0.7)' 
-          }}
+    boxShadow: '0 0 10px rgba(138, 43, 226, 0.7)', 
+    color: '#9b59b6',
+    border: '1px solid #9b59b6',
+    '--highlight-color-focused': '#9b59b6',
+    '--border-color': '#9b59b6',
+    '--border-color-focused': '#9b59b6',
+    '--box-shadow': '0 0 10px rgba(138, 43, 226, 0.7)',
+    '--box-shadow-focused': '0 0 10px rgba(138, 43, 226, 0.7)',
+
+  }}
         >
           <IonIcon 
             icon={personCircleOutline} 
@@ -139,8 +147,8 @@ const Login: React.FC = () => {
             onIonChange={(e) => setEmail(e.detail.value!)}
             style={{
               padding: '10px',
-              color: '#fff',
-              textShadow: '0 0 10px #8a2be2, 0 0 20px #9b59b6', // glow effect for input text
+              color: '#9b59b6',
+              textShadow: '0 0 15px #8a2be2, 0 0 20px #9b59b6', // glow effect for input text
             }}
           />
         </IonItem>
@@ -152,7 +160,15 @@ const Login: React.FC = () => {
             marginBottom: '20px',
             borderRadius: '10px', 
             backgroundColor: '#3a3a7b',
-            boxShadow: '0 0 10px rgba(138, 43, 226, 0.7)',
+            boxShadow: '0 0 15px rgba(138, 43, 226, 0.7)',
+            color: '#9b59b6',
+    border: '1px solid #9b59b6',
+    '--highlight-color-focused': '#9b59b6',
+    '--border-color': '#9b59b6',
+    '--border-color-focused': '#9b59b6',
+    '--box-shadow': '0 0 10px rgba(138, 43, 226, 0.7)',
+    '--box-shadow-focused': '0 0 10px rgba(138, 43, 226, 0.7)',
+
           }}
         >
           <IonIcon 
@@ -169,7 +185,7 @@ const Login: React.FC = () => {
               //border: '1px solid #9b59b6',
               //borderRadius: '10px',
               padding: '10px',
-              color: '#fff',
+              color: '#9b59b6',
               //backgroundColor: '#3a3a7b',
             }}
           >

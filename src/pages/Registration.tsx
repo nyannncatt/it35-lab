@@ -3,7 +3,7 @@ import {
   IonButton,
   IonContent,
   IonInput,
-  IonInputPasswordToggle,
+  //IonInputPasswordToggle,
   IonPage,
   IonTitle,
   IonModal,
@@ -16,6 +16,31 @@ import {
   IonAlert,
   IonIcon,
 } from '@ionic/react';
+
+// Set default violet color variable
+const violet = '#9b59b6';
+
+// Override Ionic component styles globally (if needed)
+const violetStyles = `
+  .violet-text, .violet * {
+    color: ${violet} !important;
+    --color: ${violet} !important;
+  }
+  .violet-bg, .violet-bg * {
+    background: ${violet} !important;
+    --background: ${violet} !important;
+  }
+  .violet-border, .violet-border * {
+    border-color: ${violet} !important;
+    --border-color: ${violet} !important;
+  }
+`;
+if (typeof document !== 'undefined' && !document.getElementById('violet-style')) {
+  const style = document.createElement('style');
+  style.id = 'violet-style';
+  style.innerHTML = violetStyles;
+  document.head.appendChild(style);
+}
 import { supabase } from '../utils/supabaseClient';
 import bcrypt from 'bcryptjs';
 import { personAddSharp } from 'ionicons/icons';
@@ -37,7 +62,7 @@ const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void
 const glowingInputStyle = {
   marginTop: '15px',
   borderRadius: '10px',
-  color: '#fff',
+  color: '#9b59b6',
   border: '1px solid #9b59b6',
   boxShadow: '0 0 10px rgba(138, 43, 226, 0.7)',
   '--highlight-color-focused': '#9b59b6',
@@ -147,18 +172,42 @@ const Register: React.FC = () => {
         <IonInput label="Email" labelPlacement="stacked" fill="outline" type="email" placeholder="youremail@nbsc.edu.ph" value={email} onIonChange={e => setEmail(e.detail.value!)} style={glowingInputStyle} />
 
         <IonInput label="Password" labelPlacement="stacked" fill="outline" type="password" placeholder="Enter password" value={password} onIonChange={e => setPassword(e.detail.value!)} style={glowingInputStyle}>
-          <IonInputPasswordToggle slot="end" />
+          {/* <IonInputPasswordToggle slot="end" /> */}
         </IonInput>
 
         <IonInput label="Confirm Password" labelPlacement="stacked" fill="outline" type="password" placeholder="Confirm password" value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)} style={glowingInputStyle}>
-          <IonInputPasswordToggle slot="end" />
+          {/* <IonInputPasswordToggle slot="end"/>  */}
         </IonInput>
 
-        <IonButton onClick={handleOpenVerificationModal} expand="full" shape="round" style={{ marginTop: '15px' }}>
+        <IonButton
+          onClick={handleOpenVerificationModal}
+          expand="full"
+          shape="round"
+          style={{
+            marginTop: '20px',
+            borderRadius: '20px',
+            boxShadow: '0 0 20px rgba(138, 43, 226, 0.7)',
+            transition: 'all 0.3s ease',
+            // Custom background color using CSS variable
+            '--background': '#9b59b6',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 0 25px rgba(138, 43, 226, 0.7)')}
+          onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 0 20px rgba(138, 43, 226, 0.7)')}
+        >
           Register
         </IonButton>
 
-        <IonButton routerLink="/it35-lab" expand="full" fill="clear" shape="round">
+        <IonButton
+          routerLink="/it35-lab"
+          expand="full"
+          fill="clear"
+          shape="round"
+          style={{
+            color: '#9b59b6',
+            textShadow: '0 0 10px rgba(138, 43, 226, 0.7), 0 0 20px rgba(138, 43, 226, 0.5)',
+            fontWeight: 'bold'
+          }}
+        >
           Already have an account? Sign in
         </IonButton>
 

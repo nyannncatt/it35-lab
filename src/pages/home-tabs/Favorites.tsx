@@ -28,7 +28,7 @@ const Favorites: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonButtons slot="start">
+            <IonButtons slot="start" style={{ color: 'violet' }}>
             <IonMenuButton></IonMenuButton>
           </IonButtons>
           <IonTitle>Favorites</IonTitle>
