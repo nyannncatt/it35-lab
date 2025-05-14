@@ -7,8 +7,9 @@ import {
       IonTitle, 
       IonToolbar 
   } from '@ionic/react';
+  //import SchoolComSphereContainer from '../../components/SchoolComSphereContainer';
   
-  const Account: React.FC = () => {
+  const SchoolComSphere: React.FC = () => {
     return (
       <IonPage>
         <IonHeader>
@@ -16,23 +17,13 @@ import {
             <IonButtons slot='start'>
               <IonMenuButton></IonMenuButton>
             </IonButtons>
-            <IonTitle>My-Account</IonTitle>
+            <IonTitle>Feed</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-          }}
-        >
-          My-Account
-        </div>
         </IonContent>
       </IonPage>
     );
   };
   
-  export default Account;
+  export default SchoolComSphere;

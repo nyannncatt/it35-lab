@@ -21,14 +21,15 @@ import {
     import Favorites from './home-tabs/Favorites';
     import Feed from './home-tabs/Feed';
     import Search from './home-tabs/Search'; 
-    import Account from './home-tabs/Account'; 
+  
+import SchoolComSphere from './home-tabs/SchoolComSphere';
     
     const Home: React.FC = () => {
       const tabs = [
         {name:'Feed', tab:'feed',url: '/it35-lab/app/home/feed', icon: bookOutline},
         {name:'Search', tab:'search', url: '/it35-lab/app/home/search', icon: search},
         {name:'Favorites',tab:'favorites', url: '/it35-lab/app/home/favorites', icon: star},
-        {name:'Account',tab:'account', url: '/it35-lab/app/home/account', icon: personOutline},
+        {name:'SchoolComSphere',tab:'schoolcomsphere', url: '/it35-lab/app/home/schoolcomsphere', icon: personOutline},
       ]
       return (
         
@@ -47,7 +48,7 @@ import {
           <Route exact path="/it35-lab/app/home/feed" render={Feed} />
           <Route exact path="/it35-lab/app/home/search" render={Search} />
           <Route exact path="/it35-lab/app/home/favorites" render={Favorites} />
-          <Route exact path="/it35-lab/app/home/account" render={Account} />
+          <Route exact path="/it35-lab/app/home/schoolcomsphere" render={SchoolComSphere} />
           <Route exact path="/it35-lab/app/home">
             <Redirect to="/it35-lab/app/home/feed" />
           </Route>
